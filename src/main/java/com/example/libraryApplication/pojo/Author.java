@@ -28,5 +28,10 @@ public class Author {
     @JsonIgnore
     @OneToMany(mappedBy = "author",cascade = CascadeType.ALL)
     private List<Books> books;
-
+//    @ManyToMany
+//    @JoinTable(name = "STUDENT_AUTHOR",
+//        joinColumns = @JoinColumn(name = "author_id",referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "student_id",referencedColumnName = "id")
+//    )
+//    private Set<Student> students ;
 }

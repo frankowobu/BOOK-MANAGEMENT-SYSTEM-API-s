@@ -11,16 +11,20 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "USER_ROLE")
-public class UserLogin {
+@Table(name = "USERS")
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false)
     private Long id;
-
     @NonNull
-    @Column(name = "username",nullable = false)
-    private String username;
+    @Column(name = "first_name",nullable = false)
+    private String firstName;
+    @NonNull
+    @Column(name = "last_name",nullable = false)
+    private String lastName;
+    @NonNull
+    @Column(name = "email",nullable = false)
+    private String email;
     @NonNull
     @Column(name = "password",nullable = false)
     private String password;
@@ -28,8 +32,5 @@ public class UserLogin {
     @Column(name = "role",nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
-    @JsonIgnore
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Books> books;
 
 }

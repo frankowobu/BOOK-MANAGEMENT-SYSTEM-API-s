@@ -1,9 +1,11 @@
 package com.example.libraryApplication.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @RequiredArgsConstructor
 @NoArgsConstructor
@@ -25,11 +27,17 @@ public class Books {
     @NonNull
     @Column(name = "book_summary",nullable = false)
     private String summary;
-    @ManyToOne
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
-    private UserLogin user;
     @ManyToOne(optional = false)
     @JoinColumn(name = "author_id",referencedColumnName = "id")
     private Author author;
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "books",cascade = CascadeType.ALL)
+    private List<BorrowedBooks> borrowedBooks;
+    @JsonIgnore
+    @OneToMany(mappedBy = "books",cascade = CascadeType.ALL)
+    private List<ReturnedBooks> returnedBooks ;
+    @NonNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status",nullable = false)
+    private BookStatus bookStatus;
 }
