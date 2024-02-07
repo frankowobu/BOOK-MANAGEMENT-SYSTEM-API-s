@@ -25,7 +25,7 @@ paste this url on your browser http://localhost:8081/h2
 OPEN YOUR POSTMAN TO TEST THE API
 
 git clone https://github.com/frankowobu/BOOK-MANAGEMENT-SYSTEM-POSTMAN.git
-This conatin all the api request in this project.
+This conatins all the api's request in this project.
 
 
 
