@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
             createUsers.setLastName(userSignUp.getLastName());
             createUsers.setEmail(userSignUp.getEmail());
             createUsers.setPassword(passwordEncoder.encode(userSignUp.getPassword()));
-            createUsers.setRole(Role.valueOf(userSignUp.getRole()));
+            createUsers.setRole(Role.LIBRARIAN);
             userRepository.save(createUsers);
         }
         else throw new UserFoundException(userSignUp.getEmail());
@@ -44,8 +44,8 @@ public class UserServiceImpl implements UserService {
         else throw new UserFoundException(email);
     }
 
-    @Override
-    public void loginUser(UserSignIn userSignIn) {
-
-    }
+//    @Override
+//    public void loginUser(UserSignIn userSignIn) {
+//
+//    }
 }

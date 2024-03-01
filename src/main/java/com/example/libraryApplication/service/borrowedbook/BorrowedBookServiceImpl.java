@@ -1,12 +1,10 @@
 package com.example.libraryApplication.service.borrowedbook;
 
-import com.example.libraryApplication.dto.booksDto.BookDto;
 import com.example.libraryApplication.dto.borrowedBookDto.BorrowedBooksDto;
 import com.example.libraryApplication.pojo.*;
 import com.example.libraryApplication.repository.BorrowedBooksRepository;
 import com.example.libraryApplication.service.books.BookServiceImpl;
 import com.example.libraryApplication.service.student.StudentServiceImpl;
-import com.example.libraryApplication.service.user.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

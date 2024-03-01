@@ -9,5 +9,5 @@ import java.util.List;
 public interface UserService {
    void createUsers(UserSignUp userSignUp);
    Users getUser(String email);
-   void loginUser(UserSignIn userSignIn);
+//   void loginUser(UserSignIn userSignIn);
 }
