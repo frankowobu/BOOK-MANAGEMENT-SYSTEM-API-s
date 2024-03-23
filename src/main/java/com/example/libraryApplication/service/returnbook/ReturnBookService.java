@@ -1,7 +1,7 @@
 package com.example.libraryApplication.service.returnbook;
 
 import com.example.libraryApplication.dto.returnBookDto.ReturnBookDto;
-import com.example.libraryApplication.pojo.ReturnedBooks;
+import com.example.libraryApplication.entity.ReturnedBooks;
 
 import java.util.List;
 

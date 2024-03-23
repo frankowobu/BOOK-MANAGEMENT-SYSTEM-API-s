@@ -3,13 +3,9 @@ package com.example.libraryApplication.service.author;
 
 
 import com.example.libraryApplication.dto.authorDto.AuthorDto;
-import com.example.libraryApplication.dto.authorDto.SearchAuthorDto;
-import com.example.libraryApplication.dto.booksDto.AuthorBooksDto;
-import com.example.libraryApplication.pojo.Author;
-import com.example.libraryApplication.pojo.Books;
+import com.example.libraryApplication.entity.Author;
 
 import java.util.List;
-import java.util.Set;
 
 public interface AuthorService {
     void addAuthor(AuthorDto authorDto);

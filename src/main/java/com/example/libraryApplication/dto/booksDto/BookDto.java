@@ -1,6 +1,5 @@
 package com.example.libraryApplication.dto.booksDto;
 
-import com.example.libraryApplication.pojo.BookStatus;
 import lombok.Data;
 
 @Data

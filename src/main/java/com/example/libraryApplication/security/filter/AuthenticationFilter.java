@@ -1,21 +1,16 @@
 package com.example.libraryApplication.security.filter;
 
-import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.example.libraryApplication.dto.usersdto.UserSignIn;
-import com.example.libraryApplication.dto.usersdto.UserSignUp;
 import com.example.libraryApplication.security.SecurityConstant;
 import com.example.libraryApplication.security.manager.CustomAuthenticationManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.jsonwebtoken.Jwt;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -23,6 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @AllArgsConstructor
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     CustomAuthenticationManager customAuthenticationManager;
@@ -39,8 +37,12 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+        List<String> roles = authResult.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
         String token = com.auth0.jwt.JWT.create()
                 .withSubject(authResult.getName())
+                .withClaim("role", roles)
                 .withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstant.TOKEN_EXPIRATION))
                 .sign(Algorithm.HMAC512(SecurityConstant.SECRET_KEY));
         response.addHeader(SecurityConstant.AUTHORIZATION, SecurityConstant.BEARER + token);

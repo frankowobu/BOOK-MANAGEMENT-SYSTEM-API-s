@@ -1,18 +1,16 @@
-package com.example.libraryApplication.pojo;
+package com.example.libraryApplication.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "USERS")
-public class Users {
+@Table(name = "LIBRARIAN")
+public class Librarian {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,5 +30,8 @@ public class Users {
     @Column(name = "role",nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private Users user;
 
 }

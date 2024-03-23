@@ -1,7 +1,7 @@
 package com.example.libraryApplication.controller;
 
 import com.example.libraryApplication.dto.booksDto.BookDto;
-import com.example.libraryApplication.pojo.Books;
+import com.example.libraryApplication.entity.Books;
 import com.example.libraryApplication.service.books.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

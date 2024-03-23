@@ -1,4 +1,4 @@
-package com.example.libraryApplication.pojo;
+package com.example.libraryApplication.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

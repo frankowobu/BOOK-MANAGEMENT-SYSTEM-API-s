@@ -1,11 +1,12 @@
 package com.example.libraryApplication.service.books;
 
+import com.example.libraryApplication.dto.authorDto.SearchAuthorDto;
 import com.example.libraryApplication.dto.booksDto.AuthorBooksDto;
 import com.example.libraryApplication.dto.booksDto.BookDto;
 import com.example.libraryApplication.exception.BooksNotFoundException;
-import com.example.libraryApplication.pojo.Author;
-import com.example.libraryApplication.pojo.BookStatus;
-import com.example.libraryApplication.pojo.Books;
+import com.example.libraryApplication.entity.Author;
+import com.example.libraryApplication.entity.BookStatus;
+import com.example.libraryApplication.entity.Books;
 import com.example.libraryApplication.repository.BookRepository;
 import com.example.libraryApplication.service.author.AuthorServiceImpl;
 import lombok.AllArgsConstructor;
@@ -97,8 +98,8 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public List<AuthorBooksDto> getAllBooksOfAuthor(Long authorId) {
-        List<Books> booksList = bookRepository.findByAuthorId(authorId);
+    public List<AuthorBooksDto> getAllBooksOfAuthor(SearchAuthorDto authorInfo) {
+        List<Books> booksList = bookRepository.findByAuthor(authorInfo);
         List<AuthorBooksDto> authorBooksDtoList = new ArrayList<>();
         for (Books item : booksList){
             authorBooksDtoList.add(changeBookToAuthorBookDto(item));

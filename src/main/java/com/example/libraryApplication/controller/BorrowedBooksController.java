@@ -1,6 +1,7 @@
 package com.example.libraryApplication.controller;
 
 import com.example.libraryApplication.dto.borrowedBookDto.BorrowedBooksDto;
+import com.example.libraryApplication.dto.borrowedBookDto.ValidateBorrowedBook;
 import com.example.libraryApplication.service.borrowedbook.BorrowedBookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,5 +23,10 @@ public class BorrowedBooksController {
     @GetMapping
     public ResponseEntity<List<BorrowedBooksDto>> getAllBorrowedBooks(){
         return new ResponseEntity<>(borrowedBookService.getBorrowBooks(),HttpStatus.ACCEPTED);
+    }
+    @PutMapping("/validate")
+    public ResponseEntity<HttpStatus> validateBorrowedBooks(@RequestBody ValidateBorrowedBook borrowedBook){
+        borrowedBookService.validateBorrowedBookStatus(borrowedBook);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }

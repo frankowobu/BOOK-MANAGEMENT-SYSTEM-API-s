@@ -19,12 +19,12 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
         }
         catch (EntityNotFoundException e){
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            response.getWriter().write("USERNAME or PASSWORD NOT FOUND");
+            response.getWriter().write("INVALID USERNAME OR PASSWORD");
             response.getWriter().flush();
         }
         catch (JWTVerificationException e){
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            response.getWriter().write("JWT NOT VALID");
+            response.getWriter().write("INVALID TOKEN");
             response.getWriter().flush();
         }
         catch (RuntimeException e){

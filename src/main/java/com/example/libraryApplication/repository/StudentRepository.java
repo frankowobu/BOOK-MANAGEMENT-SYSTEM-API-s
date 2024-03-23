@@ -1,7 +1,6 @@
 package com.example.libraryApplication.repository;
 
-import com.example.libraryApplication.pojo.Student;
-import com.example.libraryApplication.pojo.Users;
+import com.example.libraryApplication.entity.Student;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

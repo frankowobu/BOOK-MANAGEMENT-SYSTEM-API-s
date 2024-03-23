@@ -1,11 +1,11 @@
 package com.example.libraryApplication.service.books;
 
+import com.example.libraryApplication.dto.authorDto.SearchAuthorDto;
 import com.example.libraryApplication.dto.booksDto.AuthorBooksDto;
 import com.example.libraryApplication.dto.booksDto.BookDto;
-import com.example.libraryApplication.pojo.BookStatus;
-import com.example.libraryApplication.pojo.Books;
+import com.example.libraryApplication.entity.BookStatus;
+import com.example.libraryApplication.entity.Books;
 
-import java.awt.print.Book;
 import java.util.List;
 
 public interface BookService {
@@ -17,5 +17,5 @@ public interface BookService {
     BookDto changeBookToBookDto(Books book);
     AuthorBooksDto changeBookToAuthorBookDto(Books books);
     List<BookDto> getAllBook();
-    List<AuthorBooksDto> getAllBooksOfAuthor(Long authorId);
+    List<AuthorBooksDto> getAllBooksOfAuthor(SearchAuthorDto authorInfo);
 }

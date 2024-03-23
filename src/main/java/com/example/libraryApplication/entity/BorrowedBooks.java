@@ -1,4 +1,4 @@
-package com.example.libraryApplication.pojo;
+package com.example.libraryApplication.entity;
 
 import lombok.*;
 
@@ -25,6 +25,10 @@ public class BorrowedBooks {
     @ManyToOne
     @JoinColumn(name = "book_id",referencedColumnName = "id")
     private Books books;
+    @NonNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status",nullable = false)
+    private BorrowedBooksStatus borrowedBooksStatus;
 
     public Date getBorrowedDate() {
         return borrowedDate;

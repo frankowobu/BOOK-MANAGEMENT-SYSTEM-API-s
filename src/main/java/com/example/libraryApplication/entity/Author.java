@@ -1,4 +1,4 @@
-package com.example.libraryApplication.pojo;
+package com.example.libraryApplication.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -6,7 +6,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @RequiredArgsConstructor
 @NoArgsConstructor
@@ -28,10 +27,4 @@ public class Author {
     @JsonIgnore
     @OneToMany(mappedBy = "author",cascade = CascadeType.ALL)
     private List<Books> books;
-//    @ManyToMany
-//    @JoinTable(name = "STUDENT_AUTHOR",
-//        joinColumns = @JoinColumn(name = "author_id",referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "student_id",referencedColumnName = "id")
-//    )
-//    private Set<Student> students ;
 }

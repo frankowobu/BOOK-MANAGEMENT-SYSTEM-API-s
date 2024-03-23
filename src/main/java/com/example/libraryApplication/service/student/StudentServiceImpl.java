@@ -1,12 +1,17 @@
 package com.example.libraryApplication.service.student;
 
-import com.example.libraryApplication.dto.studentDto.StudentDto;
+import com.example.libraryApplication.dto.usersdto.StudentDto;
+import com.example.libraryApplication.entity.Role;
+import com.example.libraryApplication.entity.Users;
 import com.example.libraryApplication.exception.StudentNotFoundException;
-import com.example.libraryApplication.pojo.Student;
+import com.example.libraryApplication.entity.Student;
 import com.example.libraryApplication.repository.StudentRepository;
+import com.example.libraryApplication.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,17 +20,35 @@ import java.util.Optional;
 @AllArgsConstructor
 public class StudentServiceImpl implements StudentService{
     StudentRepository studentRepository;
+    UserRepository userRepository;
+    BCryptPasswordEncoder passwordEncoder;
+
     @Override
+    @Transactional
     public void createStudent(StudentDto studentDto) {
         Optional<Student> optionalStudent = studentRepository.findByEmail(studentDto.getEmail());
-        if (!optionalStudent.isPresent()){
+        if (!optionalStudent.isPresent()) {
             Student createStudent = new Student();
             createStudent.setName(studentDto.getName());
             createStudent.setEmail(studentDto.getEmail());
             createStudent.setDepartment(studentDto.getDepartment());
+            createStudent.setGender(studentDto.getGender());
+            createStudent.setPassword(passwordEncoder.encode(studentDto.getPassword()));
+            createStudent.setRole(Role.STUDENT);
+
+            Users user = new Users();
+            user.setEmail(studentDto.getEmail());
+            user.setPassword(passwordEncoder.encode(studentDto.getPassword()));
+            user.setRole(Role.STUDENT);
+            user.setStudent(createStudent);
+            userRepository.save(user);
+
+            //save to student db
+            createStudent.setUser(user);
             studentRepository.save(createStudent);
+        } else {
+            throw new StudentNotFoundException(studentDto.getEmail());
         }
-        else throw new StudentNotFoundException(studentDto.getEmail());
     }
 
     @Override
@@ -37,12 +60,18 @@ public class StudentServiceImpl implements StudentService{
         else throw new StudentNotFoundException(studentId);
     }
     @Override
-    public Student updateStudent(StudentDto studentDto) {
+    public String updateStudent(StudentDto studentDto) {
         Student updateStudent = getStudent(studentDto.getId());
         updateStudent.setName(studentDto.getName());
         updateStudent.setEmail(studentDto.getEmail());
         updateStudent.setDepartment(studentDto.getDepartment());
-        return studentRepository.save(updateStudent);
+        updateStudent.setGender(studentDto.getGender());
+
+        Users updateUser = updateStudent.getUser();
+        updateUser.setEmail(updateStudent.getEmail());
+
+        studentRepository.save(updateStudent);
+        return "student information updated";
     }
 
     @Override
@@ -52,11 +81,14 @@ public class StudentServiceImpl implements StudentService{
         studentDto.setName(student.getName());
         studentDto.setEmail(student.getEmail());
         studentDto.setDepartment(student.getDepartment());
+        studentDto.setGender(student.getGender());
         return studentDto;
     }
     @Override
-    public void deleteStudent(Long studentId) {
-        studentRepository.deleteById(studentId);
+    public String deleteStudent(Long studentId) {
+        Student student = getStudent(studentId);
+        studentRepository.deleteById(student.getId());
+        return student.getName()+ " deleted successfully";
     }
 
     @Override

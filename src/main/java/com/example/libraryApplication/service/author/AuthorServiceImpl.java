@@ -1,21 +1,17 @@
 package com.example.libraryApplication.service.author;
 
 import com.example.libraryApplication.dto.authorDto.AuthorDto;
-import com.example.libraryApplication.dto.booksDto.AuthorBooksDto;
 import com.example.libraryApplication.exception.AuthorNotFoundException;
-import com.example.libraryApplication.pojo.Author;
+import com.example.libraryApplication.entity.Author;
 
-import com.example.libraryApplication.pojo.Books;
 import com.example.libraryApplication.repository.AuthorRepository;
 import com.example.libraryApplication.repository.BookRepository;
-import com.example.libraryApplication.service.books.BookServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 @AllArgsConstructor
