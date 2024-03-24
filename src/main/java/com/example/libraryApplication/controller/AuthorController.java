@@ -53,7 +53,7 @@ public class AuthorController {
     public ResponseEntity<List<AuthorDto>> getAllAuthor(){
         return new ResponseEntity<>(authorService.getAllAuthor(),HttpStatus.OK);
     }
-    @GetMapping("/{id}/books")
+    @GetMapping("/books")
     public ResponseEntity<List<AuthorBooksDto>> getAllBookOfAuthor(@RequestBody SearchAuthorDto authorInfo){
         return new ResponseEntity<>(bookService.getAllBooksOfAuthor(authorInfo),HttpStatus.ACCEPTED);
     }

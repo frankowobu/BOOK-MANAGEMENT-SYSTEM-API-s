@@ -40,29 +40,29 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.DELETE, "/author/**").hasAnyAuthority(Role.LIBRARIAN.name())
 
                 // Book Controller
-                .antMatchers(HttpMethod.GET, "/book/**").hasAnyRole("LIBRARIAN", "STUDENT")
-                .antMatchers(HttpMethod.POST, "/book/**").hasRole("LIBRARIAN")
-                .antMatchers(HttpMethod.PUT, "/book/**").hasRole("LIBRARIAN")
-                .antMatchers(HttpMethod.DELETE, "/book/**").hasRole("LIBRARIAN")
+                .antMatchers(HttpMethod.GET, "/book/**").hasAnyAuthority(Role.LIBRARIAN.name(),Role.STUDENT.name())
+                .antMatchers(HttpMethod.POST, "/book/**").hasAnyAuthority(Role.LIBRARIAN.name())
+                .antMatchers(HttpMethod.PUT, "/book/**").hasAnyAuthority(Role.LIBRARIAN.name())
+                .antMatchers(HttpMethod.DELETE, "/book/**").hasAnyAuthority(Role.LIBRARIAN.name())
 
                 // Librarian Controller
-                .antMatchers(HttpMethod.GET, "/librarian/**").hasRole("LIBRARIAN")
-                .antMatchers(HttpMethod.PUT, "/librarian/**").hasRole("LIBRARIAN")
-                .antMatchers(HttpMethod.DELETE, "/librarian/**").hasRole("LIBRARIAN")
+                .antMatchers(HttpMethod.GET, "/librarian/**").hasAnyAuthority(Role.LIBRARIAN.name())
+                .antMatchers(HttpMethod.PUT, "/librarian/**").hasAnyAuthority(Role.LIBRARIAN.name())
+                .antMatchers(HttpMethod.DELETE, "/librarian/**").hasAnyAuthority(Role.LIBRARIAN.name())
 
                 // Student Controller
-                .antMatchers(HttpMethod.GET, "/student/**").hasRole("STUDENT")
-                .antMatchers(HttpMethod.PUT, "/student/**").hasRole("STUDENT")
-                .antMatchers(HttpMethod.DELETE, "/student/**").hasRole("STUDENT")
+                .antMatchers(HttpMethod.GET, "/student/**").hasAnyAuthority(Role.STUDENT.name())
+                .antMatchers(HttpMethod.PUT, "/student/**").hasAnyAuthority(Role.STUDENT.name())
+                .antMatchers(HttpMethod.DELETE, "/student/**").hasAnyAuthority(Role.STUDENT.name())
 
                 // Borrowed Books Controller
-                .antMatchers(HttpMethod.GET, "/borrowed/**").hasAnyRole("LIBRARIAN", "STUDENT")
-                .antMatchers(HttpMethod.POST, "/borrowed/**").hasAnyRole("LIBRARIAN", "STUDENT")
-                .antMatchers(HttpMethod.PUT, "/borrowed/**").hasRole("LIBRARIAN")
+                .antMatchers(HttpMethod.GET, "/borrowed/**").hasAnyAuthority(Role.LIBRARIAN.name(),Role.STUDENT.name())
+                .antMatchers(HttpMethod.POST, "/borrowed/**").hasAnyAuthority(Role.LIBRARIAN.name(),Role.STUDENT.name())
+                .antMatchers(HttpMethod.PUT, "/borrowed/**").hasAnyAuthority(Role.LIBRARIAN.name())
 
                 // Returned Books Controller
-                .antMatchers(HttpMethod.GET, "/returned/**").hasAnyRole("LIBRARIAN", "STUDENT")
-                .antMatchers(HttpMethod.POST, "/returned/**").hasAnyRole("LIBRARIAN","STUDENT")
+                .antMatchers(HttpMethod.GET, "/returned/**").hasAnyAuthority(Role.LIBRARIAN.name(),Role.STUDENT.name())
+                .antMatchers(HttpMethod.POST, "/returned/**").hasAnyAuthority(Role.LIBRARIAN.name(),Role.STUDENT.name())
 
 
                 .anyRequest().authenticated()
